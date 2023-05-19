@@ -1,0 +1,31 @@
+.textAreaField {
+    position: relative;
+    width: 250px;
+    margin: 5px 0;
+}
+
+.textArea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    outline: none;
+    color: #000000;
+    font-size: .8em;
+    transition: .5s;
+}
+
+.errorInfo{
+    /* position: absolute;
+    top:25px;
+    right: 0;
+    transform: translate(45%); */
+    color: red;
+    font-size: .5em;
+    margin: auto 0;
+    /* padding: 5px;
+    background: #ffffff;
+    border: .5px solid;
+    border-radius: 5px;
+    transition: all 0.5s ease-in-out; */
+}

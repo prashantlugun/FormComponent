@@ -1,95 +1,140 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client"
 
-export default function Home() {
+import Button from './Components/Button';
+import Input from './Components/Input';
+import Label from './Components/Label';
+import Radio from './Components/Radio';
+import Dropdown from './Components/Singledrop/Dropdown';
+import Textarea from './Components/Textarea';
+
+import ClientFunctionComponent from 'next';
+import Checkbox from './Components/checkbox';
+import { useState } from 'react';
+import MultiSelectDropdown from './Components/MultiDrop/MultiSelectDropdown';
+import MultiCheck from './Components/MultiCheck/MultiCheck';
+import Range from './Components/Range';
+import Fileupload from './Components/Fileupload';
+
+const Home = () => {
+
+  const [checkValue, setCheckValue] = useState('');
+  const [rangeVal, setRangeVal] = useState(28);
+
+  const updateRange = (val: any) => {
+    setRangeVal(val);
+  };
+
+  const dropdownOptions = [
+    { label: 'React', value: 'React' },
+    { label: 'Angular', value: 'Angular' },
+    { label: 'Java', value: 'Java' },
+    { label: 'Node', value: 'Node' },
+    { label: 'Python', value: 'Python' },
+    { label: 'AI', value: 'AI' },
+  ];
+
+  const checkedValue = (e: any) => {
+    if (e.target.checked) {
+      setCheckValue(e.target.value)
+    } else {
+      setCheckValue('')
+    }
+  }
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <>
+      <Input
+        placeholder='Blank Input'
+      />
+      <Input
+        errorText='Text Field Custom Error'
+        label='Custom Error'
+        placeholder='Custom Error'
+      />
+      <Input
+        label='Name'
+        placeholder='Name'
+      />
+      <Input
+        type='email'
+        label='Email'
+        placeholder='Email'
+        errorText='Invalid email Front'
+      />
+      {/* <Input
+        type='password'
+        label='Password'
+        placeholder='Password'
+        passwordVisibility
+      /> */}
+      <Input
+        disabled
+        label='Disabled'
+        placeholder='Disabled'
+      />
+      <Input
+        label='ReadOnly'
+        placeholder='ReadOnly'
+        value='ReadOnly'
+        readOnly
+      />
+      <Textarea
+        label='Text Area Label'
+        placeholder="Text Area"
+        rows={5}
+      />
+      <h1>Button</h1>
+      <Button>Submit</Button>
+      <Button disabled >Disabled</Button>
+      <Button variant='danger_outline' >Outline</Button>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      <Label>Label Component</Label>
+      <Radio
+        label='Male'
+        name='gender'
+      />
+      <Radio
+        label='Female'
+        name='gender'
+      />
+      <h1>CheckBox</h1>
+      <Label>{checkValue}</Label>
+      <Checkbox
+        id="myCheckbox"
+        name="myCheckbox"
+        value="checkboxValue A"
+        label="My Checkbox"
+        // onClick={ () => console.log()}
+        onClick={checkedValue}
+        sx={{ color: 'red' }}
+      />
+      <Checkbox
+        id="myCheckbox"
+        name="myCheckbox"
+        value="checkboxValue B"
+        label="My Checkbox"
+        onClick={checkedValue}
+        sx={{ color: 'red' }}
+      />
+      <Dropdown options={dropdownOptions} onSelect={(selectedOptions: any) => {
+        console.log('Single Selected options:', selectedOptions);
+      }} />
+      <MultiSelectDropdown options={dropdownOptions} onSelect={function (selectedOptions: string[]): void {
+        console.log("Multi selectedOptions :: ", selectedOptions);
+      }} />
+      <MultiCheck options={dropdownOptions} onSelect={function (selectedOptions: string[]): void {
+        console.log("Multi Check selectedOptions :: ", selectedOptions);
+      }} />
+      <h1>
+        Range
+      </h1>
+      <Range defaultValue="58" range={rangeVal} updateRange={updateRange} />
+      <h1>
+        File Upload
+      </h1>
+      <Fileupload maxSize={5} />
+    </>
+  );
+};
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
-}
+export default Home;
